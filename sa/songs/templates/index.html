@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="d-flex flex-column col-6 col-sm-6 col-md-6 col-lg-6">
+        <h2 class="py-2 my-2">
+            Spotify Audio Sentiment Analysis
+        </h2>
+        <div>
+            <p>
+                Learn more about the audio properties of your favourite tracks, including detailed rhythmic information.
+            </p>
+        </div>
+        <div>
+            <p>Let's search for a track:</p>
+        </div>
+
+        {% include 'search/form.html' %}
+    </div>
+</div>
+
+<div id="track-list" class="d-none">
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    const search_bar = document.getElementById('search-track-bar');
+    const track_list = document.getElementById('track-list')
+
+    document.body.addEventListener('htmx:beforeRequest', function(evt) {
+        var input_text = search_bar.value;
+        
+        if (input_text.length === 0) {
+            track_list.classList.add('d-none')
+        }
+    });
+
+    document.body.addEventListener('htmx:afterRequest', function(evt) {
+        var input_text = search_bar.value;
+
+        if (input_text.length !== 0) {
+            track_list.classList.remove('d-none')
+        }
+    })
+    
+</script>
+
+{% endblock %}

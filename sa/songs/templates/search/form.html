@@ -1,0 +1,10 @@
+<form action="{% url 'index' %}" method="GET">
+    <input type="text" 
+        name="search" 
+        hx-get ="{% url 'index' %}"
+        hx-trigger="keyup changed delay:100ms"
+        hx-target="#track-list"
+        id="search-track-bar"
+        value="{{ request.GET.search }}"
+    >
+</form>

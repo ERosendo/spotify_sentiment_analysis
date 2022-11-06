@@ -1,0 +1,30 @@
+
+<div class="row">
+    {% for track in songs %}
+        <div class="d-flex flex-row p-2 my-1 col-3 col-sm-3 col-md-3 ">
+            <div>
+                <img src="{{ track.album.cover }}" 
+                    alt="{{ track.album.name }}" 
+                    width="auto" 
+                    height="64"
+                    >
+            </div>
+            <div class="px-2">
+                <div>
+                    <p class="my-0">
+                        {{track.album.name}}
+                    </p>
+                </div>
+                <div>
+                    <h6>
+                        {{ track.name }}
+                    </h6>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="d-flex justify-content-center">
+            <h3> No results found </h3>
+        </div>
+    {% endfor %}
+</div>
