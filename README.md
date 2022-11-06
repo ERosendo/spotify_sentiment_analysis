@@ -1,0 +1,2 @@
+# [Sentiment Analysis using Spotify API]()
+Webapp to generate sentiment reports for Spotify songs powered by [Django](https://github.com/django/django) and [Spotipy](https://github.com/spotipy-dev/spotipy).
