@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="py-2 my-2">
+    Track Details - {{song.data.name}}
+</h3>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+        <div>
+            <img src="{{ song.data.album.cover }}" 
+                alt="{{ song.data.album.name }}" 
+                style='height: auto; width: 100%; object-fit: cover'
+                >
+        </div>
+    </div>
+    <div class='col-xs-12 col-sm-12 col-md-8 col-lg-10'>
+        <div class="row mt-2">
+            <div class="col col-7">
+                <div>
+                    <h4>
+                        Audio Features
+                    </h4>
+                </div>
+            </div>
+            <div class="col col-5 text-right">
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+                    View graph
+                </button>   
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Acousticness
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.acousticness }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Danceability
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.danceability }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Energy
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.energy }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Instrumentalness
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.instrumentalness }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Liveness
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.liveness }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Loudness
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.loudness }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Speechiness
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.speechiness }}
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <div class="row">
+                    <div class="col col-xs-6 col-md-12">
+                        <p class="my-0">
+                            Tempo
+                        </p>
+                    </div>
+                    <div class="col col-xs-6 col-md-12">
+                        {{ song.audio_features.tempo }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog width-control" role="document">
+        <div class="modal-content modal-fluid-size">
+            <div class="modal-header">
+              <h6 class="modal-title" id="exampleModalLongTitle">Graph Representation</h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <canvas id="chart" style="height:100%; box-sizing:border-box"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+<style>
+    .modal-fluid-size {
+        height: 600px;
+    }
+
+    .width-control{
+        max-width: none !important;
+        width: 950px;
+    }
+
+    @media screen and (max-width: 590px) {
+        .modal-fluid-size {
+            height: auto;
+        }
+    
+        .width-control{
+            max-width: none !important;
+            width: auto;
+        }
+    }
+
+    @media screen and (min-width: 600px ) and (max-width: 1000px) {
+        .modal-fluid-size {
+            height: 400px;
+        }
+    
+        .width-control{
+            max-width: none !important;
+            width: 600px;
+        }
+    }
+
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let ctx = document.getElementById("chart").getContext("2d");
+
+    let chart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: {{ song.labels | safe }},
+            datasets: [
+            {
+                data: {{ song.feature_value | safe }},  
+            }
+            ]
+        },
+        options: {
+            elements: {
+                line: {
+                  borderWidth: 3
+                }
+            },
+            layout:{
+                padding: 0
+            }
+        },
+        
+    });
+
+    chart.options.title.text = "top of chart";   
+    chart.options.legend.display = false;        
+    chart.options.responsive = true;
+</script>
+
+{% endblock %}
