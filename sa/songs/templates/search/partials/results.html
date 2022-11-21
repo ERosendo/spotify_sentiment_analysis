@@ -1,7 +1,7 @@
 
 <div class="row">
     {% for track in songs %}
-        <div class="d-flex flex-row p-2 my-1 col-3 col-sm-3 col-md-3 ">
+        <div class="d-flex flex-row p-2 my-1 col-xs-12 col-sm-12 col-md-6 col-lg-3">
             <div>
                 <img src="{{ track.album.cover }}" 
                     alt="{{ track.album.name }}" 
@@ -17,7 +17,9 @@
                 </div>
                 <div>
                     <h6>
-                        {{ track.name }}
+                        <a href="{% url 'detail' track.uri %}">
+                            {{ track.name }}
+                        </a>
                     </h6>
                 </div>
             </div>
