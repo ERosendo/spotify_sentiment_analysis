@@ -1,11 +1,14 @@
 
+from dataclasses import asdict, dataclass
+
 from .services import SpotifyService
-from dataclasses import dataclass
+
 
 @dataclass
 class Artist:
     uri: str
     name: str
+
 
 @dataclass
 class Album:
@@ -13,25 +16,58 @@ class Album:
     name: str
     cover: str
 
+
 @dataclass
 class Song:
     name: str
     uri: str
     album: Album
     artist: list[Artist]
-    
 
-def search_song_by_name(name:str):
+
+AUDIO_FEATURES_FOR_POLAR_GRAPH = ['acousticness',
+                                'danceability',
+                                'energy',
+                                'instrumentalness',
+                                'liveness',
+                                'speechiness',
+                                'valence']
+
+def extract_song_data(track) -> Song:
+    artist = [Artist(track['uri'], x['name']) for x in track['artists']]
+    album = Album(track['album']['uri'], track['album']
+                  ['name'], track['album']['images'][0]['url'])
+    uri = track['uri'].split(':')[-1]
+    return Song(track['name'], uri, album=album, artist=artist)
+
+def extract_audio_features(raw_features):
+    labels = []
+    data = []
+    for k, v in raw_features.items():
+        if k in AUDIO_FEATURES_FOR_POLAR_GRAPH:
+            labels.append(k)
+            data.append(v)
+    return labels, data
+
+def search_song_by_name(name: str):
     if not name:
         return []
-    
+
     sp_client = SpotifyService()
     data = sp_client.search(name, limit=12, type='track')
     song_list = []
     for song in data['tracks']['items']:
-        artist = [Artist(x['uri'], x['name']) for x in song['artists']]
-        album = Album(song['album']['uri'], song['album']['name'], song['album']['images'][0]['url'])
-        song_data = Song(song['name'], song['uri'], album= album, artist=artist)
+        song_data = extract_song_data(song)
         song_list.append(song_data)
-    
+
     return song_list
+
+
+def search_audio_features(uri: str):
+    sp_client = SpotifyService()
+
+    raw_audio_features = sp_client.get_audio_features(f'spotify:track:{uri}')
+    raw_song_data = sp_client.get_song_data(f'spotify:track:{uri}')
+    song_data = extract_song_data(raw_song_data)
+    label , values = extract_audio_features(raw_audio_features)
+    return {'data': song_data, 'audio_features': raw_audio_features, 'labels': label, 'feature_value': values}
