@@ -12,13 +12,20 @@
                 style='height: auto; width: 100%; object-fit: cover'
                 >
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center align-items-center" hx-ext="loading-states">
             <div>
                 Mood: 
             </div>
-            <div>
-                {{ mood }}
-            </div>   
+            <div
+                id="mood_description"
+                hx-trigger="load"
+                hx-get="{% url 'mood_for_song' song.data.uri %}"
+                hx-target="this"
+            >
+            </div> 
+            <div style="margin-left: 5px;margin-right:5px">
+                <i data-loading="block" class="fa fa-spinner fa-spin"></i>  
+            </div>
         </div>
     </div>
     <div class='col-xs-12 col-sm-12 col-md-8 col-lg-10'>
@@ -193,6 +200,9 @@
         }
     }
 
+    [data-loading] {
+        display: none;
+    }
 </style>
 
 {% endblock %}
