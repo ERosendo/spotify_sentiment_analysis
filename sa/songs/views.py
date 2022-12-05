@@ -24,4 +24,5 @@ def moods(request, song_uri):
     sd = spotiscience.SpotiScienceDownloader(credentials=CREDENTIALS)
     song_to_analyze = sd.get_song_features(song_id=song_uri)
     mood = sp.predict_song_mood(song=song_to_analyze)
-    return HttpResponse(f'{mood}')
+    template = 'mood/index.html'
+    return render(request, template, context={ 'mood':mood.capitalize() })
