@@ -20,19 +20,15 @@
                 style='height: auto; width: 100%; object-fit: cover'
                 >
         </div>
-        <div class="d-flex justify-content-center align-items-center" hx-ext="loading-states">
-            <div>
-                Mood:
-            </div>
-            <div
-                id="mood_description"
-                hx-trigger="load"
-                hx-get="{% url 'mood_for_song' song.data.uri %}"
-                hx-target="this"
+        <div class="d-flex justify-content-center align-items-center" 
+            hx-ext="loading-states" id="mood_description"
+            hx-trigger="load"
+            hx-get="{% url 'mood_for_song' song.data.uri %}"
+            hx-target="this"
             >
-            </div> 
-            <div style="margin-left: 5px;margin-right:5px">
-                <i data-loading="block" class="fa fa-spinner fa-spin"></i>  
+            <div data-loading="block">
+                Computing mood ...
+                <i style="margin-left: 5px;margin-right:5px" class="fa fa-spinner fa-spin"></i>  
             </div>
         </div>
     </div>
