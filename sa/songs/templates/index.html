@@ -19,8 +19,8 @@
     </div>
 </div>
 
-<div id="track-list" class="d-none">
-
+<div id="track-list" class="{% if songs|length == 0 %} d-none {% endif %}">
+    {% include 'search/partials/results.html' %}
 </div>
 
 {% endblock %}
