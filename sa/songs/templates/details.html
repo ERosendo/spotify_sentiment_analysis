@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3 class="py-2 my-2">
-    Track Details - {{song.data.name}}
-</h3>
+<div class="d-flex justify-content-between align-items-center">
+    <h3 class="py-2 my-2">
+        Track Details - {{song.data.name}}
+    </h3>
+    <div>
+        <a href="{% url 'index'%}"">
+            Go back
+        </a>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
         <div>
@@ -14,7 +22,7 @@
         </div>
         <div class="d-flex justify-content-center align-items-center" hx-ext="loading-states">
             <div>
-                Mood: 
+                Mood:
             </div>
             <div
                 id="mood_description"
@@ -49,6 +57,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Acousticness
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top"  title="A measure from 0.0 to 1.0 that detects acoustic sounds in a track.">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -61,6 +72,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Danceability
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top" title="A measure from 0.0 to 1 that indicates how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, and beat strength. A value closer to 0.0 indicates that a track is less danceable, and value closer to 1.0 is indicates that a track is more danceable.">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -73,6 +87,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Energy
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top" title="A measure from 0.0 to 1.0 that reflects the intensity of a track. Energetic tracks are usually fast, loud, and noisy.">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -85,6 +102,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Instrumentalness
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top" title="A measure from 0.0 to 1 that reflects the extent to which a track does not contain vocalizations. The closer the instrumentalness value is to 1.0, the greater the likelihood that the track does not contain vocal content.">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -97,6 +117,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Liveness
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top" title="A measure from 0.0 to 1.0 that detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live.">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -109,6 +132,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Loudness
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top" title="A measure from -60 and 0 that represents the overall loudness of a track. This value is measured in decibels (dB). Loudness values are averaged across the entire track.">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -121,6 +147,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Speechiness
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top" title="A measure from 0.0 to 1.0 that detects the presence of spoken words in a track. The more speech sounds are heard in the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the value will be.">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -134,6 +163,9 @@
                     <div class="col col-xs-6 col-md-12">
                         <p class="my-0">
                             Tempo
+                            <button type="button" class='btn btn-link m-0 p-0' data-toggle="tooltip" data-placement="top" title="The overall estimated speed of a track measured in beats per minute (BPM).">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button> 
                         </p>
                     </div>
                     <div class="col col-xs-6 col-md-12">
@@ -163,6 +195,7 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block head %}
@@ -237,6 +270,8 @@
     chart.options.title.text = "top of chart";   
     chart.options.legend.display = false;        
     chart.options.responsive = true;
+
+    $('[data-toggle="tooltip"]').tooltip();
 </script>
 
 {% endblock %}
