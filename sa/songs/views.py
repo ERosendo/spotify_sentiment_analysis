@@ -6,8 +6,8 @@ from utils.spotiscience import CREDENTIALS
 from .utils import search_audio_features, search_song_by_name
 
 def index(request):
-    search_tex = request.GET.get('search')
-    songs = search_song_by_name(search_tex)
+    search_text = request.GET.get('search')
+    songs = search_song_by_name(search_text)
     template = 'index.html'
     if request.htmx:
         template = 'search/partials/results.html'
