@@ -1,22 +1,27 @@
-<h6 style=" 
-        color: 
-        {% if mood == 'Sad' %} 
-            lightslategrey
+<div class="d-flex align-items-center">
+    <div class="d-flex w-100 justify-content-center">
+        <h6 style=" 
+            color: {% if mood == 'Sad' %} 
+                lightslategrey
+            {% elif mood == 'Happy' %}
+                red
+            {% elif mood == 'Calm' %}
+                purple
+            {% elif mood == 'Energy' %}
+                darkorange
+            {% endif %}"
+        >
+        Mood: {{ mood }}
+        {% if mood == 'Sad' %}
+            <i class="fa-regular fa-face-sad-tear"></i>
         {% elif mood == 'Happy' %}
-            red
-        {% elif mood == 'Calm' %}
-            purple
+            <i class="fa-regular fa-face-smile"></i>
         {% elif mood == 'Energy' %}
-            darkorange
-        {% endif %}">
-    Mood: {{ mood }}
-    {% if mood == 'Sad' %}
-    <i class="fa-regular fa-face-sad-tear"></i>
-    {% elif mood == 'Happy' %}
-    <i class="fa-regular fa-face-smile"></i>
-    {% elif mood == 'Energy' %}
-    <i class="fa-solid fa-explosion"></i>
-    {% elif mood == 'Calm' %}
-    <i class="fa-sharp fa-solid fa-water"></i>
-    {% endif %}
-</h6>
+            <i class="fa-solid fa-explosion"></i>
+        {% elif mood == 'Calm' %}
+            <i class="fa-sharp fa-solid fa-water"></i>
+        {% endif %}
+        </h6>
+    </div>
+<button class="btn"><i class="fa-regular fa-file-pdf"></i></button>
+</div>
