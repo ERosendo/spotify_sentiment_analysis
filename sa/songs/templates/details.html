@@ -24,11 +24,14 @@
             hx-ext="loading-states" id="mood_description"
             hx-trigger="load"
             hx-get="{% url 'mood_for_song' song.data.uri %}"
-            hx-target="this"
+            hx-target="#mood"
             >
             <div data-loading="block">
                 Computing mood ...
                 <i style="margin-left: 5px;margin-right:5px" class="fa fa-spinner fa-spin"></i>  
+            </div>
+            <div id="mood" data-loading-class="d-none" class="w-100">
+
             </div>
         </div>
     </div>
